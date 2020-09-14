@@ -3,9 +3,37 @@ import './CreatePost.css';
 
 const CreatePost = () => {
 
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [category, setCategory] = useState('');
+ const [details, setDetails] = useState({
+    title: '',
+    content: '',
+    likes: 0
+ });
+ //select element state
+ const [category, setCategory] = useState({value: ''});
+
+
+  const handleChange = (e) => {
+
+    //working mwith multiple inputs
+    const name = e.target.name
+    const value = e.target.value;
+
+    setDetails(prevValues => {
+      return {
+        ...prevValues,
+        [name]: value
+      }
+    })
+
+
+  };
+
+  //handling select category state change
+
+  const handleCategory = (e) =>  {
+    setCategory({value: e.target.value})
+
+  };
 
 
   return(
@@ -17,10 +45,7 @@ const CreatePost = () => {
 
     <div className="create__form">
 
-
-
-
-      <form onSubmit={""}>
+      <form onSubmit={"esta funcion no esta aun creada, esa hace la POST reque to firebase"}>
 
        <div className="form_control">
 
@@ -30,7 +55,7 @@ const CreatePost = () => {
            className="form-control"
            placeholder="Enter title"
            name="title"
-           onChange={""}
+           onChange={handleChange}
            required
            />
 
@@ -46,7 +71,7 @@ const CreatePost = () => {
           required
           placeholder="Write your history"
           name="content"
-          onChange={""}
+          onChange={handleChange}
           />
 
         </div>
@@ -57,7 +82,7 @@ const CreatePost = () => {
         required
          />
 
-         <select  onChange={""} required>
+         <select  onChange={handleCategory} required>
           <option value="News">News</option>
           <option value="Travel">Travel</option>
           <option value="Health">Health</option>

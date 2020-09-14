@@ -26,9 +26,7 @@ function App() {
 
 
     {/* TO DO
-      2-landing page component
-      3-Posts componentn
-      4-Create post component
+
       5- Sign in/ sign up/log out
       6 - single Post component , params and stuff like taht
 
