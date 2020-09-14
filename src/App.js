@@ -13,7 +13,6 @@ function App() {
 
 
     {/* TO DO
-
       2-landing page component
       3-Posts componentn
       4-Create post component
