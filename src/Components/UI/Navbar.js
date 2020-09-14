@@ -7,12 +7,12 @@ const NavbarComponent = () => {
 
   return(
  <Navbar collapseOnSelect expand="lg" bg="light" >
-  <Navbar.Brand href="#home">Main page</Navbar.Brand>
+  <Navbar.Brand href="/">Main page</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="#features">Post</Nav.Link>
-      <Nav.Link href="#pricing">Create post</Nav.Link>
+      <Nav.Link href="/posts">Posts</Nav.Link>
+      <Nav.Link href="/create">Create post</Nav.Link>
 
     </Nav>
     <Nav>
