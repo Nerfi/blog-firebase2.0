@@ -17,7 +17,7 @@ const LandingPage = () => {
     </div>
 
     <div className="landingPage__cards">
-    <h2>Most popular blogs on the site </h2>
+      <h2>Most popular blogs on the site </h2>
   {/* probablemente tenga que meter esto en su propio componente , pero hasta entonces lo dejare aqui*/}
 
       <Card

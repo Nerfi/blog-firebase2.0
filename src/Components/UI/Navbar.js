@@ -16,7 +16,7 @@ const NavbarComponent = () => {
 
     </Nav>
     <Nav>
-      <Nav.Link href="#deets">Sign up/in</Nav.Link>
+      <Nav.Link href="/signup">Sign up/in</Nav.Link>
 
     </Nav>
   </Navbar.Collapse>

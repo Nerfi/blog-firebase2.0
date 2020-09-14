@@ -6,6 +6,7 @@ import LandingPage from './Components/LandingPage';
 import { BrowserRouter as Router, Route, Link , Switch } from "react-router-dom";
 import Posts from './Components/Posts';
 import CreatePost from './Components/CreatePost';
+import Signup from './Auth/Signup';
 
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
 
         <Route path="/posts"  component={Posts} />
         <Route path="/create"  component={CreatePost} />
+        <Route path="/signup"  component={Signup} />
+
 
         <Route path="/" exact component={LandingPage} />
 
