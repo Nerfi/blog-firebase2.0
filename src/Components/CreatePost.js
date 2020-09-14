@@ -25,6 +25,10 @@ const CreatePost = () => {
       }
     })
 
+    console.log({
+      name, value
+    })
+
 
   };
 
@@ -61,18 +65,17 @@ const CreatePost = () => {
 
        </div>
 
+            <label>Content</label>
+
         <div className="form-group">
-
-          <label >Content</label>
-
-          <input
-          type="content"
-          className="form-control"
-          required
-          placeholder="Write your history"
-          name="content"
-          onChange={handleChange}
-          />
+          <textarea
+           name="content"
+           cols="40"
+           rows="6"
+           onChange={handleChange}
+           placeholder="Write your history"
+           required
+           />
 
         </div>
 
