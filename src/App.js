@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Link , Switch } from "react-router-dom"
 import Posts from './Components/Posts';
 import CreatePost from './Components/CreatePost';
 import Signup from './Auth/Signup';
+import SignIn from './Auth/SignIn';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/posts"  component={Posts} />
         <Route path="/create"  component={CreatePost} />
         <Route path="/signup"  component={Signup} />
+        <Route path="/signIn"  component={SignIn} />
 
 
         <Route path="/" exact component={LandingPage} />
