@@ -50,8 +50,7 @@ const Signup = () => {
         })
      })
      .catch(function(error) {
-  // Handle Errors here.
-    const errorCode = error.code;
+
     const errorMessage = error.message;
   // updating state if error
     setError(errorMessage);
@@ -83,6 +82,7 @@ const Signup = () => {
          value={email}
          onChange={handleChange}
          required
+         autoComplete="true"
          />
 
       </div>
@@ -96,6 +96,7 @@ const Signup = () => {
         name="password"
         value={password}
         placeholder="enter your passsword"
+        autoComplete="off"
         onChange={handleChange}
         required
         />
