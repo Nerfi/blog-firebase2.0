@@ -1,6 +1,9 @@
 import React from 'react';
 import './LandingPage.css';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import firebase from '../firebase/firebase';
+
+console.log({firebase})
 
 const LandingPage = () => {
   return (

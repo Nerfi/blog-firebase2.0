@@ -11,7 +11,7 @@
   width: 500px;
   height: 350px;
   padding-top: 83px;
-  /*background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);*/
+
   box-shadow: 0 8px 6px -6px black;
 background: #abbaab;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */

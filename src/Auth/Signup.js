@@ -11,7 +11,6 @@ const Signup = () => {
   return <div className="signup__container">
 
     <div className="signup__form">
-    <p>over here should place  alogo I guess</p>
     <h2>Sign Up!</h2>
 
     <form>
