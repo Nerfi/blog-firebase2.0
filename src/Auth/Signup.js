@@ -31,7 +31,7 @@ const Signup = () => {
         [name]: value
       }
     });
-  }
+  };
 
 
 
@@ -59,8 +59,6 @@ const Signup = () => {
 
 
   };
-
-
 
 
   return <div className="signup__container">
