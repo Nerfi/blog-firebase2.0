@@ -1,0 +1,15 @@
+.signIn__container {
+  border-style: dashed;
+  display: flex;
+  justify-content: center;
+  margin-top: 15vh;
+}
+
+
+.signIn__form {
+  width: 350px;
+  align-items: center;
+  border-style: double;
+  height: 250px;
+  padding-top: 50px;
+}

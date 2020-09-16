@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import './SignIn.css';
 
 const SignIn = () => {
 
@@ -28,7 +29,7 @@ const SignIn = () => {
 
   return <div className="signIn__container">
 
-    <form onSubmit={"here goes a function"}>
+    <form onSubmit={"here goes a function"} className="signIn__form">
 
       <label>Email</label>
 
