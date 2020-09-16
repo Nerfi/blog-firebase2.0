@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import './SignIn.css';
+import firebase from  '../firebase/firebase';
 
-const SignIn = () => {
+const SignIn = ({history}) => {
 
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
   });
+
+  //setting up error state
+  const [error, setError] = useState(null);
     //global variables
   const {email, password} = credentials;
 
@@ -25,11 +29,34 @@ const SignIn = () => {
     });
 
 
+  };
+
+  //onSubmit handler, sign in user with email and password methods from firebase
+  const handleSubmit = async (e) => {
+
+    e.preventDefault();
+
+    //firebase methods
+   await firebase.auth().signInWithEmailAndPassword(email, password)
+   .then(userSignin => {
+      history.replace("/");
+   })
+    .catch(function(error) {
+  // Handle Errors here.
+      const Message = error.message;
+      setError(Message)
+    });
+
   }
 
   return <div className="signIn__container">
 
-    <form onSubmit={"here goes a function"} className="signIn__form">
+    <form onSubmit={handleSubmit} className="signIn__form">
+
+      <h2>
+        SignIn !
+      </h2>
+      {error && error}
 
       <label>Email</label>
 
@@ -57,6 +84,8 @@ const SignIn = () => {
          onChange={handleChange}
         />
       </div>
+
+      <button type="submit" className="btn__signin">Submit</button>
 
 
     </form>

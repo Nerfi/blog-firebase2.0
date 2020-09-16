@@ -3,7 +3,7 @@ import './App.css';
 import NavbarComponent from './Components/UI/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import LandingPage from './Components/LandingPage';
-import { BrowserRouter as Router, Route, Link , Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route,  Switch } from "react-router-dom";
 import Posts from './Components/Posts';
 import CreatePost from './Components/CreatePost';
 import Signup from './Auth/Signup';
