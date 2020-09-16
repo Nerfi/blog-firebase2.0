@@ -21,7 +21,7 @@ function App() {
 
 
       <Router>
-      <Switch>
+        <Switch>
 
         <AuthProvider>
 

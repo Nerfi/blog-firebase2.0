@@ -20,7 +20,7 @@ const AuthContext = React.createContext();
       firebase.auth().onAuthStateChanged((user) => {
         setCurrentUser(user);
 
-      })
+      });
 
 
   },[currentUser]);
