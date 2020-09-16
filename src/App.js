@@ -9,22 +9,33 @@ import CreatePost from './Components/CreatePost';
 import Signup from './Auth/Signup';
 import SignIn from './Auth/SignIn';
 
+//importing the context in order to listen when the user auth state changes
+import {AuthProvider} from '../src/Components/UserContext/AuthContext';
+
+
+
 
 function App() {
   return (
     <div className="App">
-      <NavbarComponent/>
+
 
       <Router>
       <Switch>
 
-        <Route path="/posts"  component={Posts} />
-        <Route path="/create"  component={CreatePost} />
-        <Route path="/signup"  component={Signup} />
-        <Route path="/signIn"  component={SignIn} />
+        <AuthProvider>
+
+         <NavbarComponent/>
+
+          <Route path="/posts"  component={Posts} />
+          <Route path="/create"  component={CreatePost} />
+          <Route path="/signup"  component={Signup} />
+          <Route path="/signIn"  component={SignIn} />
+
+         <Route path="/" exact component={LandingPage} />
+        </AuthProvider>
 
 
-        <Route path="/" exact component={LandingPage} />
 
         </Switch>
       </Router>
