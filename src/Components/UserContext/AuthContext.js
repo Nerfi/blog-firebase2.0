@@ -2,9 +2,6 @@ import React, {useState, useEffect} from 'react';
 import firebase from '../../../src/firebase/firebase';
 
 //1- we create the context hook
-
-// PD: in case something doesnt work I porpusely ommit the export keyword that I wrote in the old app context folder
-
 const AuthContext = React.createContext();
 
 /*

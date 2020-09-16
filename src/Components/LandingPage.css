@@ -5,6 +5,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
+
 }
 
 
@@ -14,7 +15,7 @@
   top: 50%;
   left: 32%;
   transform: translate(-50%, -50%);
-  color: red;
+  color: black;
 }
 
 

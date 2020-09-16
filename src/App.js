@@ -40,13 +40,6 @@ function App() {
         </Switch>
       </Router>
 
-
-    {/* TO DO
-
-      5- Sign in/ sign up/log out
-      6 - single Post component , params and stuff like taht
-
-    */}
     </div>
   );
 }
