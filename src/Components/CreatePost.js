@@ -1,15 +1,21 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import './CreatePost.css';
 //importing storage in order to upload a imgae to firebase
 import { storage }  from '../../src/firebase/firebase';
+import firebase from '../../src/firebase/firebase';
+//importing the context we created earlier
+import {AuthContext} from './UserContext/AuthContext';
 
-const CreatePost = () => {
+const CreatePost = ({history}) => {
 
  const [details, setDetails] = useState({
     title: '',
     content: '',
     likes: 0
  });
+
+ //using the context
+ const user = useContext(AuthContext)
 
 //adding state in order to upload an img
 const allImputs = {imgUrl: ''};
@@ -21,7 +27,8 @@ const [imageAsUrl, setImageAsUrl] = useState(allImputs);
  const [category, setCategory] = useState({value: ''});
 
  //global variables
- const {title, content} = details;
+ const {title, content,likes} = details;
+ const {imgUrl} = imageAsUrl;
 
  //error state
  const [error, setError] = useState(null);
@@ -60,7 +67,7 @@ const [imageAsUrl, setImageAsUrl] = useState(allImputs);
   //managing the upload of an img, I'll call this function in the main one that I use to upload the whole , in this case post, to firebase
   const handleFirebaseUpload = e => {
 
-    e.preventDefault();
+
     console.log('start upload');
 
     //error handlign
@@ -72,11 +79,11 @@ const [imageAsUrl, setImageAsUrl] = useState(allImputs);
     const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
 
     //initializing firebase uploading
-    uploadTask.on('state_change', (snapShot) => {
+    uploadTask.on('state_changed', (snapShot) => {
       //takes an snapShot of the process as it is happening, uploading basically
       console.log(snapShot)
     }, (err) => {
-        setError(err);
+        setError(err.message);
 
     }, () => {
       // gets the functions from storage refences the image storage in firebase by the children
@@ -85,8 +92,45 @@ const [imageAsUrl, setImageAsUrl] = useState(allImputs);
           .then(firebaseUrl => {
             setImageAsUrl(prevObject => ({...prevObject, imgUrl: firebaseUrl}))
           })
+          .catch(err => {
+            setError(err.message);
+          })
 
     })
+
+
+  };
+
+  //creating onSubmit fucntion to upload a whole doc to firebase
+
+  const handleUploadPost = async (e) => {
+
+    e.preventDefault();
+
+    if(user) {
+     await firebase
+      .firestore()
+      .collection("posts")
+      .add({
+        title,
+        likes,
+        content,
+        imgUrl: imgUrl,
+        currentUser: user.uid
+
+      })
+      .then(() => {
+        history.push("/");
+      })
+      .catch(err => {
+        setError(err.message);
+      })
+    }
+
+    //calling function to upload img to storage
+    handleFirebaseUpload();
+
+
 
 
   };
@@ -99,9 +143,11 @@ const [imageAsUrl, setImageAsUrl] = useState(allImputs);
     <h2>Share with us your history !</h2>
     </div>
 
+      <p>{error && error}</p>
+
     <div className="create__form">
 
-      <form onSubmit={"esta funcion no esta aun creada, esa hace la POST reque to firebase"}>
+      <form onSubmit={handleUploadPost}>
 
        <div className="form_control">
 
