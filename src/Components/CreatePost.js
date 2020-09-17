@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import './CreatePost.css';
+//importing storage in order to upload a imgae to firebase
+import { storage }  from '../../src/firebase/firebase';
 
 const CreatePost = () => {
 
@@ -8,8 +10,21 @@ const CreatePost = () => {
     content: '',
     likes: 0
  });
+
+//adding state in order to upload an img
+const allImputs = {imgUrl: ''};
+const [imageAsFile, setImageAsFile] = useState('');
+const [imageAsUrl, setImageAsUrl] = useState(allImputs);
+
+
  //select element state
  const [category, setCategory] = useState({value: ''});
+
+ //global variables
+ const {title, content} = details;
+
+ //error state
+ const [error, setError] = useState(null);
 
 
   const handleChange = (e) => {
@@ -34,8 +49,45 @@ const CreatePost = () => {
 
   //handling select category state change
 
-  const handleCategory = (e) =>  {
-    setCategory({value: e.target.value})
+  const handleCategory = e => setCategory({value: e.target.value});
+
+  //handling img upload, onChange listener
+  const handleImgUpload = e => {
+    const image = e.target.files[0]; //taking the first image we upload, just the first
+    setImageAsFile(imageFile => (image));
+  };
+
+  //managing the upload of an img, I'll call this function in the main one that I use to upload the whole , in this case post, to firebase
+  const handleFirebaseUpload = e => {
+
+    e.preventDefault();
+    console.log('start upload');
+
+    //error handlign
+    if (imageAsFile ===  '') {
+      console.log(' not a single imgae was upload, can be null or underfined');
+    };
+
+    //starting the upload process and also creating the path /images in firestore
+    const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+
+    //initializing firebase uploading
+    uploadTask.on('state_change', (snapShot) => {
+      //takes an snapShot of the process as it is happening, uploading basically
+      console.log(snapShot)
+    }, (err) => {
+        setError(err);
+
+    }, () => {
+      // gets the functions from storage refences the image storage in firebase by the children
+      // gets the download url then sets the image from firebase as the value for the imgUrl key:
+          storage.ref('images').child(imageAsFile.name).getDownloadURL()
+          .then(firebaseUrl => {
+            setImageAsUrl(prevObject => ({...prevObject, imgUrl: firebaseUrl}))
+          })
+
+    })
+
 
   };
 
@@ -60,6 +112,7 @@ const CreatePost = () => {
            placeholder="Enter title"
            name="title"
            onChange={handleChange}
+           value={title}
            required
            />
 
@@ -73,6 +126,7 @@ const CreatePost = () => {
            cols="40"
            rows="6"
            onChange={handleChange}
+           value={content}
            placeholder="Write your history"
            required
            />
@@ -81,7 +135,7 @@ const CreatePost = () => {
 
         <input
         type="file"
-        onChange={""}
+        onChange={handleImgUpload}
         required
          />
 

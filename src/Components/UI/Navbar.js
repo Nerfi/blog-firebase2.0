@@ -5,8 +5,9 @@ import Nav from 'react-bootstrap/Nav';
 //importing the context that I created before in order to listen to user auth change
 import {AuthContext} from '../../../src/Components/UserContext/AuthContext';
 import firebase from '../../firebase/firebase';
+import  {useHistory} from 'react-router-dom';
 
-const NavbarComponent = ({history}) => {
+const NavbarComponent = () => {
 
 
     //adding state in order to display error message in case there is one
@@ -15,12 +16,14 @@ const NavbarComponent = ({history}) => {
     //using the context that we created before
     const user = useContext(AuthContext);
 
+    const history = useHistory();
+
     //handling log out of a user
     const handleLogOut = () => {
       firebase.auth().signOut()
       .then(() =>{
           // I use replace because I dont want the user to come back to the old page once he logs out, UI experience
-          history.replace("/");
+          history.push("/");
       })
       .catch(error => {
         setError(error.message);

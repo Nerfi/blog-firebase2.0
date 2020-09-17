@@ -1,6 +1,8 @@
 
 import firebase from 'firebase';
 import 'firebase/firestore';
+//importing storage in order to upload img
+import 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -18,10 +20,16 @@ const firebaseConfig = {
 //initilalizing the app
 firebase.initializeApp(firebaseConfig);
 
+//initializing firebase storage
+const storage = firebase.storage();
 
 
-//exporting firebase
-export default firebase;
+
+
+
+
+//exporting as default firebase and storage
+export {storage, firebase as default}
 
 
 

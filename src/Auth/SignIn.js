@@ -44,7 +44,6 @@ const SignIn = ({history}) => {
       history.replace("/");
    })
     .catch(function(error) {
-  // Handle Errors here.
       const Message = error.message;
       setError(Message)
     });
@@ -68,7 +67,7 @@ const SignIn = ({history}) => {
         name="email"
         value={email}
         placeholder="Enter you email"
-        autoComplete="true"
+        autoComplete
         onChange={handleChange}
         />
 
