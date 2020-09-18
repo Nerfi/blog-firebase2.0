@@ -72,7 +72,7 @@ const [url, setURL] = useState("");
         .child(file.name)
         .getDownloadURL()
         .then((url) => {
-          setFile(null);
+         // setFile(null); check out this later, not sure if the issue is because of this or not
           setURL(url);
       })
 

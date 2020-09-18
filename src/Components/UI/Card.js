@@ -1,7 +1,10 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 
-const CardComponent = () => {
+const CardComponent = ({data}) => {
+
+
+  console.log(data.title, data.content);
 
   return <div className="card__container">
 
@@ -11,12 +14,11 @@ const CardComponent = () => {
         style={{ width: '18rem' }}
         className="mb-2"
       >
-        <Card.Header>POST TITLE OVER HERE</Card.Header>
+        <Card.Header>{data.title}</Card.Header>
         <Card.Body>
           <Card.Title>Card Title </Card.Title>
           <Card.Text>
-            Some quick example text to build on the card title and make up the bulk
-            of the card's content.
+           {data.content}
           </Card.Text>
         </Card.Body>
     </Card>

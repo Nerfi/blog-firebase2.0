@@ -7,46 +7,38 @@ import CardComponent from './UI/Card';
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    //making api call to firebase in order to retrieve the data I want to
+
     const fetchPosts = async () => {
 
-      const pop = [];
+      const datastore = await firebase.firestore().collection("posts")
 
-    await firebase
-    .firestore()
-    .collection("posts")
-    .get()
-    .then(snapShot => {
+        datastore.get().then((snapShot) => {
 
-      snapShot.forEach(doc => {
-        /*console.log(doc.id, doc.data());*/
+          const newArray = [];
 
-        pop.push({ id: doc.id, ...doc.data() } )
+          snapShot.forEach((doc) => {
+            newArray.push({ id: doc.id, ...doc.data() })
+          })
 
-        setPosts(pop);
-
-      })
-    })
-
-
+          setPosts(newArray);
+        })
     };
 
+    //calling the function
     fetchPosts();
 
 
 
   },[]);
 
-    console.log(posts, "posts array")
-
-
-
-
 
   return <div className="posts__container">
 
-
-    <CardComponent/>
+  {
+    posts.map(posts => {
+    return <CardComponent data={posts} key={posts.id}/>
+  })
+}
 
   </div>
  };
