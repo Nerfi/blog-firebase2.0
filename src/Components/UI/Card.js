@@ -1,26 +1,11 @@
 import React from 'react';
-import './LandingPage.css';
 import Card from 'react-bootstrap/Card';
 
+const CardComponent = () => {
 
-const LandingPage = () => {
-  return (
-    <>
-    <div className="landing__page">
+  return <div className="card__container">
 
-    <div className="landing__text">
-    <h2>aqui va algo debe ir un texto que diga qlql con la app, cambiar fuente, y hacerlo mas grande en general pero por ahora esta bien</h2>
-    </div>
-
-
-
-
-    </div>
-
-    <div className="landingPage__cards">
-      <h2>Most popular blogs on the site </h2>
-
-      <Card
+    <Card
         bg="success"
         text="dark"
         style={{ width: '18rem' }}
@@ -36,12 +21,7 @@ const LandingPage = () => {
         </Card.Body>
     </Card>
 
-    </div>
+  </div>
+};
 
-    </>
-
-
-  );
-}
-
-export default LandingPage;
+export default CardComponent;

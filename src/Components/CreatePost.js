@@ -47,11 +47,6 @@ const [url, setURL] = useState("");
       }
     })
 
-    console.log({
-      name, value
-    })
-
-
   };
 
   //handling select category state change
@@ -77,7 +72,7 @@ const [url, setURL] = useState("");
         .child(file.name)
         .getDownloadURL()
         .then((url) => {
-          //setFile(null);
+          setFile(null);
           setURL(url);
       })
 

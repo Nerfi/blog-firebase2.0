@@ -4,8 +4,6 @@ import firebase from  '../firebase/firebase';
 
 const SignIn = ({history}) => {
 
-
-
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
