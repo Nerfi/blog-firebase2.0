@@ -18,8 +18,9 @@ const CreatePost = ({history}) => {
  const user = useContext(AuthContext)
 
 //adding state in order to upload an img
-const [file, setFile] = useState(null);
+const [file, setFile] = useState("");
 const [url, setURL] = useState("");
+
 
 
  //select element state
@@ -27,7 +28,7 @@ const [url, setURL] = useState("");
 
  //global variables
  const {title, content,likes} = details;
- const {imgUrl} = imageAsUrl;
+ const {value} = category;
 
  //error state
  const [error, setError] = useState(null);
@@ -58,44 +59,32 @@ const [url, setURL] = useState("");
   const handleCategory = e => setCategory({value: e.target.value});
 
   //handling img upload, onChange listener
-  const handleImgUpload = e => {
-    const image = e.target.files[0]; //taking the first image we upload, just the first
-    setImageAsFile(imageFile => (image));
-  };
+    //taking the first image we upload, just the first
+  const handleImgUpload = e =>  setFile(e.target.files[0]);
+
 
   //managing the upload of an img, I'll call this function in the main one that I use to upload the whole , in this case post, to firebase
-  const handleFirebaseUpload = e => {
-
-
-    console.log('start upload');
-
-    //error handlign
-    if (imageAsFile ===  '') {
-      console.log(' not a single imgae was upload, can be null or underfined');
-    };
+  const handleFirebaseUpload = () => {
 
     //starting the upload process and also creating the path /images in firestore
-    const uploadTask = storage.ref(`/images/${imageAsFile.name}`).put(imageAsFile);
+    const uploadTask = storage.ref(`/images/${file.name}`).put(file);
 
-    //initializing firebase uploading
-    uploadTask.on('state_changed', (snapShot) => {
-      //takes an snapShot of the process as it is happening, uploading basically
-      console.log(snapShot)
-    }, (err) => {
-        setError(err.message);
+    //refactoring
 
-    }, () => {
-      // gets the functions from storage refences the image storage in firebase by the children
-      // gets the download url then sets the image from firebase as the value for the imgUrl key:
-          storage.ref('images').child(imageAsFile.name).getDownloadURL()
-          .then(firebaseUrl => {
-            setImageAsUrl(prevObject => ({...prevObject, imgUrl: firebaseUrl}))
-          })
-          .catch(err => {
-            setError(err.message);
-          })
+    uploadTask.on('state_changed', () => {
+      storage
+        .ref("images")
+        .child(file.name)
+        .getDownloadURL()
+        .then((url) => {
+          //setFile(null);
+          setURL(url);
+      })
 
+    },(err) => {
+      setError(err.message);
     })
+
 
 
   };
@@ -106,7 +95,7 @@ const [url, setURL] = useState("");
 
     e.preventDefault();
 
-    if(user) {
+    if(user && url) {
      await firebase
       .firestore()
       .collection("posts")
@@ -114,7 +103,8 @@ const [url, setURL] = useState("");
         title,
         likes,
         content,
-        imgUrl: imgUrl,
+        value,
+        imgUrl: url,
         currentUser: user.uid
 
       })
@@ -128,10 +118,6 @@ const [url, setURL] = useState("");
 
     //calling function to upload img to storage
     handleFirebaseUpload();
-
-
-
-
   };
 
 
