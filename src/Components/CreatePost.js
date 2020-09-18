@@ -18,9 +18,8 @@ const CreatePost = ({history}) => {
  const user = useContext(AuthContext)
 
 //adding state in order to upload an img
-const allImputs = {imgUrl: ''};
-const [imageAsFile, setImageAsFile] = useState('');
-const [imageAsUrl, setImageAsUrl] = useState(allImputs);
+const [file, setFile] = useState(null);
+const [url, setURL] = useState("");
 
 
  //select element state
