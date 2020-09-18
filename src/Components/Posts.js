@@ -1,6 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import firebase from '../firebase/firebase';
 import CardComponent from './UI/Card';
+import './Posts.css';
 
  const Posts = () => {
 
@@ -24,10 +25,8 @@ import CardComponent from './UI/Card';
         })
     };
 
-    //calling the function
+    //calling the function, always call it !
     fetchPosts();
-
-
 
   },[]);
 
