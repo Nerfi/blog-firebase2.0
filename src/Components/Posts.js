@@ -3,7 +3,9 @@ import firebase from '../firebase/firebase';
 import CardComponent from './UI/Card';
 import './Posts.css';
 
- const Posts = () => {
+ const Posts = (props) => {
+
+  console.log({props})
 
   const [posts, setPosts] = useState([]);
 
@@ -35,7 +37,7 @@ import './Posts.css';
 
   {
     posts.map(posts => {
-    return <CardComponent data={posts} key={posts.id}/>
+    return <CardComponent data={posts} key={posts.id} match={props.match}/>
   })
 }
 

@@ -1,5 +1,5 @@
-.navbar__component {
-  display: flex;
-   justify-content: flex-start;
 
+.navbar__container {
+  background-color: red;
+  color:red;
 }

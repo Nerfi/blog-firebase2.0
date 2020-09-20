@@ -32,10 +32,10 @@ const NavbarComponent = () => {
 
 
   return(
-    <>
+    <div className="navbar__container">
 
       <h2>{error && error}</h2>
-       <Navbar collapseOnSelect expand="lg" bg="light" >
+       <Navbar collapseOnSelect expand="lg" bg="light"  >
         <Navbar.Brand href="/">Main page</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -56,7 +56,7 @@ const NavbarComponent = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-    </>
+    </div>
     )
 
 
