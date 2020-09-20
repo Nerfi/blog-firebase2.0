@@ -6,6 +6,7 @@ const SinglePost = (props) => {
 
   const [selectedPost, setSelected] = useState({});
   const [error, setError] = useState(null);
+  //not sure if I'll have to add and state in order to hold the likes count
 
   useEffect(() => {
 
@@ -28,6 +29,9 @@ const SinglePost = (props) => {
 
   },[props.match.params.id]);
 
+  //for testing porpuses, it's working
+  const addLikes = () => alert('working')
+
 
 
   return <div className="singlePost__container">
@@ -49,8 +53,10 @@ const SinglePost = (props) => {
     <div className="something"> {selectedPost.value} </div>
 
     <div className="something2">
-     <i class="fa fa-heart"> </i>
-      {selectedPost.likes === 0 ? "Be the firs to like the post" : selectedPost.likes}
+
+       <i class="fa fa-heart" onClick={addLikes} >
+        {selectedPost.likes === 0 ? "Be the firs to like the post" : selectedPost.likes}
+       </i>
 
 
     </div>
