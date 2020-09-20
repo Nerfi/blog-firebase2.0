@@ -5,8 +5,6 @@ import './Posts.css';
 
  const Posts = (props) => {
 
-  console.log({props})
-
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -37,7 +35,7 @@ import './Posts.css';
 
   {
     posts.map(posts => {
-    return <CardComponent data={posts} key={posts.id} match={props.match}/>
+    return <CardComponent data={posts} key={posts.id} />
   })
 }
 

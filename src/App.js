@@ -28,7 +28,7 @@ function App() {
 
          <NavbarComponent/>
 
-           <Route path="/post/id"  component={SinglePost} />
+           <Route path="/post/:id"  component={SinglePost} />
           <Route path="/posts"  component={Posts} />
           <Route path="/create"  component={CreatePost} />
           <Route path="/signup"  component={Signup} />

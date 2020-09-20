@@ -3,7 +3,7 @@ import {Card, Button} from 'react-bootstrap';
 import './Card.css';
 import {Link} from 'react-router-dom';
 
-const CardComponent = ({data, match}) => {
+const CardComponent = ({data}) => {
 
   return <div className="card__container">
 

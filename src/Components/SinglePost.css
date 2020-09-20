@@ -1,0 +1,24 @@
+.singlePost__title {
+  margin: 25px;
+}
+
+.singlePost__img {
+  border-style: double;
+}
+
+
+.singlePost__content > p {
+  font-size: 25px;
+}
+
+
+.singlePost__data {
+  display: flex;
+  width: 250px;
+  border-style: dashed;
+  justify-content: space-evenly;
+  margin-left: 33rem;
+
+
+}
+
