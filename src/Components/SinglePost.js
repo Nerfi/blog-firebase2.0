@@ -47,8 +47,6 @@ const SinglePost = (props) => {
           .catch(error => {
             setError(error.message)
           })
-
-
   };
 
 
@@ -80,6 +78,14 @@ const SinglePost = (props) => {
 
     </div>
 
+    </div>
+
+    <div className="singlePost__coments">
+       <div className="Comment-text">
+        <textarea className="comment-textarea" rows="0" cols="22" placeholder="add a comment!">
+
+         </textarea>
+       </div>
     </div>
 
 

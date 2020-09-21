@@ -15,10 +15,8 @@
 .singlePost__data {
   display: flex;
   width: 250px;
-  border-style: dashed;
   justify-content: space-evenly;
   margin-left: 33rem;
 
 
 }
-
