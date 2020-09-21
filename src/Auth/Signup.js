@@ -46,9 +46,11 @@ const Signup = () => {
     await firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(result => {
         //testing if we can display the name when user sign up on the app
-     result.user.updateProfile({
-          displayName: username
-        })
+        if(result) {
+           result.user.updateProfile({
+                displayName: username
+            })
+        }
 
 
         //creating a user collection in order to store the users on it

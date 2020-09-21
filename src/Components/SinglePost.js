@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import firebase from '../firebase/firebase';
 import './SinglePost.css';
+import {AuthContext} from './UserContext/AuthContext';
 
 const SinglePost = (props) => {
 
@@ -15,6 +16,8 @@ const SinglePost = (props) => {
   //desestructurando select post object
   const {likes} = selectedPost;
 
+  //user context
+  const {displayName, uid} = useContext(AuthContext);
 
 
     const fetchSelected = async () =>  {
@@ -82,7 +85,9 @@ const SinglePost = (props) => {
     e.preventDefault();
     //get into the specific post and add a new collection in order to render and have several comments for a specific post!
     firebase.firestore().collection('posts').doc(props.match.params.id).collection('comments').add({
-      text: comment
+      text: comment,
+      user: displayName,
+      userUid: uid
     })
 
     //cleaning the state
@@ -121,9 +126,14 @@ const SinglePost = (props) => {
     <div className="singlePost__comments">
 
         {comments.map(comment => {
+
           return (
-            <ul>
-              <li> <p>{comment.text}</p> </li>
+            <ul  key={comment.text}>
+              <li>
+                <p> <strong>{comment.user}</strong> {comment.text}</p>
+
+              </li>
+
             </ul>
           )
         })}
