@@ -8,7 +8,8 @@ const Signup = () => {
 
   const [credentials, setCredentials] = useState({
     email: '',
-    password: ''
+    password: '',
+    username: ''
   });
 
   //adding error handling state
@@ -16,7 +17,7 @@ const Signup = () => {
 
 
   //Global variables
-  const {email, password} = credentials;
+  const {email, password, username} = credentials;
 
   //handling changes in inputs
 
@@ -36,7 +37,7 @@ const Signup = () => {
 
 
 
-  //creating user with email and password, this is a n asyn action
+  //creating user with email and password, this is an asyn action
   const handleSubmit = async  (e) => {
     //preventing default behavior of forms
     e.preventDefault();
@@ -44,9 +45,16 @@ const Signup = () => {
     //making the request
     await firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(result => {
+        //testing if we can display the name when user sign up on the app
+     result.user.updateProfile({
+          displayName: username
+        })
+
+
         //creating a user collection in order to store the users on it
         firebase.firestore().collection("users").doc(firebase.auth().currentUser.uid).set({
           email
+          //maybe add later the username here
         })
      })
      .catch(function(error) {
@@ -70,6 +78,19 @@ const Signup = () => {
      {error && error}
 
     <form onSubmit={handleSubmit}>
+
+    <label> User name </label>
+    <div className="form_control">
+
+      <input
+      type="text"
+      name="username"
+      placeholder="username"
+      onChange={handleChange}
+      required
+      />
+
+    </div>
 
 
       <label> Email </label>
