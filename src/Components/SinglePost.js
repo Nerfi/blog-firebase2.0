@@ -6,6 +6,10 @@ const SinglePost = (props) => {
 
   const [selectedPost, setSelected] = useState({});
   const [error, setError] = useState(null);
+
+  //adding state for comments
+  const [comment, setComment] = useState('');
+
   //not sure if I'll have to add and state in order to hold the likes count
 
   //desestructurando select post object
@@ -51,6 +55,19 @@ const SinglePost = (props) => {
 
 
 
+  //adding locig in order to post a comment
+
+  const postComment = (e) => {
+    e.preventDefault();
+    //get into the specific post and add a new collection in order to render and have several comments for a specific post!
+    firebase.firestore().collection('posts').doc(props.match.params.id).collection('comments').add({
+      text: comment
+    })
+
+    //cleaning the state
+    setComment('');
+  }
+
   return <div className="singlePost__container">
     <div className="singlePost__title">
 
@@ -80,13 +97,25 @@ const SinglePost = (props) => {
 
     </div>
 
-    <div className="singlePost__coments">
-       <div className="Comment-text">
-        <textarea className="comment-textarea" rows="0" cols="22" placeholder="add a comment!">
+    <form>
 
-         </textarea>
-       </div>
-    </div>
+      <input
+      className="post__input"
+      type="text"
+      placeholder="Add a comment..."
+      value={comment}
+      onChange={(e) => setComment(e.target.value)}
+      />
+
+      <button
+      className="button__input"
+      disabled={!comment}
+      type="submit"
+      onClick={postComment}
+      >
+      Post
+      </button>
+    </form>
 
 
   </div>

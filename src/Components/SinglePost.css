@@ -20,3 +20,14 @@
 
 
 }
+
+
+.post__input {
+  flex: 1;
+  border:none;
+}
+
+.button__input {
+  flex:0;
+  background-color: none;
+}
