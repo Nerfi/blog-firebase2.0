@@ -8,6 +8,9 @@ const SinglePost = (props) => {
   const [error, setError] = useState(null);
   //not sure if I'll have to add and state in order to hold the likes count
 
+  //desestructurando select post object
+  const {likes} = selectedPost;
+
   useEffect(() => {
 
     const fetchSelected = async () =>  {
@@ -29,8 +32,24 @@ const SinglePost = (props) => {
 
   },[props.match.params.id]);
 
-  //for testing porpuses, it's working
-  const addLikes = () => alert('working')
+
+
+  const addLikes = async () => {
+    //add likes action is kinda of upadte/patch request
+    await firebase
+          .firestore()
+          .collection("posts")
+          .doc(props.match.params.id)
+          .update({likes: likes + 1})
+          .then(() => {
+            setSelected({...selectedPost, likes: likes + 1})
+          })
+          .catch(error => {
+            setError(error.message)
+          })
+
+
+  };
 
 
 
@@ -54,7 +73,7 @@ const SinglePost = (props) => {
 
     <div className="something2">
 
-       <i class="fa fa-heart" onClick={addLikes} >
+       <i className="fa fa-heart" onClick={addLikes} >
         {selectedPost.likes === 0 ? "Be the firs to like the post" : selectedPost.likes}
        </i>
 
