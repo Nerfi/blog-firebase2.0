@@ -9,13 +9,13 @@ const SinglePost = (props) => {
 
   //adding state for comments
   const [comment, setComment] = useState('');
+  const [comments, setComments] = useState([]);
 
-  //not sure if I'll have to add and state in order to hold the likes count
 
   //desestructurando select post object
   const {likes} = selectedPost;
 
-  useEffect(() => {
+
 
     const fetchSelected = async () =>  {
 
@@ -31,8 +31,29 @@ const SinglePost = (props) => {
 
     };
 
+    //fetching the comments for each posts
+
+    const fetchComments = async () => {
+
+        await firebase.firestore()
+            .collection('posts')
+            .doc(props.match.params.id)
+            .collection('comments')
+            .onSnapshot(snapShot => {
+             // setComments(snapShot.docs.map(doc) => doc.data() )
+              setComments(snapShot.docs.map(doc => doc.data()))
+
+            })
+    };
+
+
+
+  useEffect(() => {
+
     //calling the funciton, always
     fetchSelected();
+    //calling the comments function
+    fetchComments();
 
   },[props.match.params.id]);
 
@@ -94,6 +115,18 @@ const SinglePost = (props) => {
 
 
     </div>
+
+    </div>
+
+    <div className="singlePost__comments">
+
+        {comments.map(comment => {
+          return (
+            <ul>
+              <li> <p>{comment.text}</p> </li>
+            </ul>
+          )
+        })}
 
     </div>
 
