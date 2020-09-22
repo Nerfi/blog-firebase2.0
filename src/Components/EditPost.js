@@ -55,7 +55,7 @@ const EditPost = (props) => {
 
        <div className="form_control">
 
-        <label>Title</label>
+        <label>{editPost.title}</label>
 
           <input type="text"
            className="form-control"
@@ -68,7 +68,7 @@ const EditPost = (props) => {
 
        </div>
 
-            <label>Content</label>
+            <label>{editPost.content}</label>
 
         <div className="form-group">
           <textarea

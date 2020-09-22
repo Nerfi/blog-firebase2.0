@@ -6,89 +6,27 @@ import firebase from '../../src/firebase/firebase';
 //importing the context we created earlier
 import {AuthContext} from './UserContext/AuthContext';
 
-const CreatePost = ({history}) => {
+//importing the form component lets see
+import Form from './UI/Form';
 
- const [details, setDetails] = useState({
-    title: '',
-    content: '',
-    likes: 0
- });
+const CreatePost = ({history}) => {
 
  //using the context
  const user = useContext(AuthContext)
 
 //adding state in order to upload an img
 const [file, setFile] = useState("");
-const [url, setURL] = useState("");
+//const [url, setURL] = useState("");
 
 
-
- //select element state
- const [category, setCategory] = useState({value: ''});
-
- //global variables
- const {title, content,likes} = details;
- const {value} = category;
 
  //error state
  const [error, setError] = useState(null);
 
-
-  const handleChange = (e) => {
-
-    //working mwith multiple inputs
-    const name = e.target.name
-    const value = e.target.value;
-
-    setDetails(prevValues => {
-      return {
-        ...prevValues,
-        [name]: value
-      }
-    })
-
-  };
-
-  //handling select category state change
-
-  const handleCategory = e => setCategory({value: e.target.value});
-
-  //handling img upload, onChange listener
-    //taking the first image we upload, just the first
-  const handleImgUpload = e =>  setFile(e.target.files[0]);
-
-
-  //managing the upload of an img, I'll call this function in the main one that I use to upload the whole , in this case post, to firebase
-  const handleFirebaseUpload = () => {
-
-    //starting the upload process and also creating the path /images in firestore
-    const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-
-    //refactoring
-
-    uploadTask.on('state_changed', () => {
-      storage
-        .ref("images")
-        .child(file.name)
-        .getDownloadURL()
-        .then((url) => {
-         // setFile(null); check out this later, not sure if the issue is because of this or not
-          setURL(url);
-      })
-
-    },(err) => {
-      setError(err.message);
-    })
-
-
-
-  };
-
   //creating onSubmit fucntion to upload a whole doc to firebase
 
-  const handleUploadPost = async (e) => {
+  const handleUploadPost = async (title, likes,content,value,url, currentUser) => {
 
-    e.preventDefault();
 
     if(user && url) {
      await firebase
@@ -100,7 +38,7 @@ const [url, setURL] = useState("");
         content,
         value,
         imgUrl: url,
-        currentUser: user.uid
+        currentUser: currentUser //he cambiado este value, antes era :user.uid, ahora es currenUser
 
       })
       .then(() => {
@@ -111,8 +49,6 @@ const [url, setURL] = useState("");
       })
     }
 
-    //calling function to upload img to storage
-    handleFirebaseUpload();
   };
 
 
@@ -123,59 +59,16 @@ const [url, setURL] = useState("");
     <h2>Share with us your history !</h2>
     </div>
 
-      <p>{error && error}</p>
+
 
     <div className="create__form">
 
-      <form onSubmit={handleUploadPost}>
-
-       <div className="form_control">
-
-        <label>Title</label>
-
-          <input type="text"
-           className="form-control"
-           placeholder="Enter title"
-           name="title"
-           onChange={handleChange}
-           value={title}
-           required
-           />
-
-       </div>
-
-            <label>Content</label>
-
-        <div className="form-group">
-          <textarea
-           name="content"
-           cols="40"
-           rows="6"
-           onChange={handleChange}
-           value={content}
-           placeholder="Write your history"
-           required
-           />
-
-        </div>
-
-        <input
-        type="file"
-        onChange={handleImgUpload}
-        required
-         />
-
-         <select  onChange={handleCategory} required>
-          <option value="News">News</option>
-          <option value="Travel">Travel</option>
-          <option value="Health">Health</option>
-          <option value="Tech">Tech</option>
-        </select>
-
-        <button type="submit" className="btn_create">Add Post</button>
+     <Form
+      upload={handleUploadPost}
+      mistake={error}
+     />
 
 
-      </form>
     </div>
 
     </>
