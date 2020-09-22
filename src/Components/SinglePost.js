@@ -118,7 +118,7 @@ const SinglePost = (props) => {
       selectedPost.currentUser === uid ? (
        <div className="singlePost__conditional">
           <button onClick={deletePost}>Delete</button>
-         <Link to="/edit/post/:id">Edit post</Link>
+         <Link to={`/edit/post/${props.match.params.id}`} >Edit post</Link>
       </div>
       ): null
   }
