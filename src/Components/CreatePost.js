@@ -1,11 +1,8 @@
 import React, {useState, useContext} from 'react';
 import './CreatePost.css';
-//importing storage in order to upload a imgae to firebase
-import { storage }  from '../../src/firebase/firebase';
 import firebase from '../../src/firebase/firebase';
 //importing the context we created earlier
 import {AuthContext} from './UserContext/AuthContext';
-
 //importing the form component lets see
 import Form from './UI/Form';
 
@@ -50,8 +47,6 @@ const CreatePost = ({history}) => {
     <div className="banner">
     <h2>Share with us your history !</h2>
     </div>
-
-
 
     <div className="create__form">
 

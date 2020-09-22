@@ -2,8 +2,6 @@ import React,{useState, useContext} from 'react';
 import {AuthContext} from '../UserContext/AuthContext';
 import { storage }  from '../../../src/firebase/firebase';
 
-
-
 const Form = ({upload }) => {
 
   //adding the state that will be independent
