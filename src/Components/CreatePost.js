@@ -14,16 +14,8 @@ const CreatePost = ({history}) => {
  //using the context
  const user = useContext(AuthContext)
 
-//adding state in order to upload an img
-const [file, setFile] = useState("");
-//const [url, setURL] = useState("");
-
-
-
  //error state
  const [error, setError] = useState(null);
-
-  //creating onSubmit fucntion to upload a whole doc to firebase
 
   const handleUploadPost = async (title, likes,content,value,url, currentUser) => {
 
@@ -63,10 +55,10 @@ const [file, setFile] = useState("");
 
     <div className="create__form">
 
-     <Form
-      upload={handleUploadPost}
-      mistake={error}
-     />
+       <Form
+        upload={handleUploadPost}
+        mistake={error}
+       />
 
 
     </div>
