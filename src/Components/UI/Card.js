@@ -7,20 +7,20 @@ const CardComponent = ({data}) => {
 
   return <div className="card__container">
 
-<Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src={data.imgUrl} />
-  <Card.Body>
-    <Card.Title>{data.title}</Card.Title>
-    <Card.Text>
-      {data.content}
-    </Card.Text>
-    <Button variant="primary">
-      <Link style={{color: 'white'}} to={`/post/${data.id}`} >
-      See post
-      </Link>
-    </Button>
-  </Card.Body>
-</Card>
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" src={data.imgUrl} />
+        <Card.Body>
+          <Card.Title>{data.title}</Card.Title>
+          <Card.Text>
+            {data.content}
+          </Card.Text>
+          <Button variant="primary">
+            <Link style={{color: 'white'}} to={`/post/${data.id}`} >
+            See post
+            </Link>
+          </Button>
+        </Card.Body>
+      </Card>
   </div>
 };
 

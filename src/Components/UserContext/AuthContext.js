@@ -16,7 +16,7 @@ const AuthContext = React.createContext();
 
   useEffect(() => {
 
-
+        //onauthStatechange is a hook that will listen whenever the user is logged in or logged out  in the app just that
       firebase.auth().onAuthStateChanged((user) => {
         setCurrentUser(user);
 

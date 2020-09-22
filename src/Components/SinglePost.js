@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import firebase from '../firebase/firebase';
 import './SinglePost.css';
 import {AuthContext} from './UserContext/AuthContext';
+import {Link} from 'react-router-dom';
 
 const SinglePost = (props) => {
 
@@ -16,9 +17,9 @@ const SinglePost = (props) => {
   //desestructurando select post object
   const {likes} = selectedPost;
 
-  //user context
+  //user context, when there is no user I got an error: Cannot destructure property 'displayName' of 'Object(...)(...)' as it is null.
+  //not sure how to fix it yet
   const {displayName, uid} = useContext(AuthContext);
-
 
     const fetchSelected = async () =>  {
 
@@ -84,14 +85,19 @@ const SinglePost = (props) => {
   const postComment = (e) => {
     e.preventDefault();
     //get into the specific post and add a new collection in order to render and have several comments for a specific post!
-    firebase.firestore().collection('posts').doc(props.match.params.id).collection('comments').add({
-      text: comment,
-      user: displayName,
-      userUid: uid
-    })
+
+      firebase.firestore().collection('posts').doc(props.match.params.id).collection('comments').add({
+        text: comment,
+        user: displayName,
+        userUid: uid
+      })
 
     //cleaning the state
     setComment('');
+  }
+
+  const deletePost = () => {
+    return 'hola'
   }
 
   return <div className="singlePost__container">
@@ -108,18 +114,30 @@ const SinglePost = (props) => {
       <p> {selectedPost.content}</p>
     </div>
 
+    {
+      selectedPost.currentUser === uid ? (
+       <div className="singlePost__conditional">
+          <button onClick={deletePost}>Delete</button>
+         <Link to="/edit/post/:id">Edit post</Link>
+      </div>
+      ): null
+  }
+
+
     <div className="singlePost__data">
 
-    <div className="something"> {selectedPost.value} </div>
+      <div className="something">
+        {selectedPost.value}
+      </div>
 
-    <div className="something2">
+      <div className="something2">
 
-       <i className="fa fa-heart" onClick={addLikes} >
-        {selectedPost.likes === 0 ? "Be the firs to like the post" : selectedPost.likes}
-       </i>
+         <i className="fa fa-heart" onClick={addLikes} >
+          {selectedPost.likes === 0 ? "Be the firs to like the post" : selectedPost.likes}
+         </i>
 
 
-    </div>
+      </div>
 
     </div>
 

@@ -9,6 +9,7 @@ import CreatePost from './Components/CreatePost';
 import Signup from './Auth/Signup';
 import SignIn from './Auth/SignIn';
 import SinglePost from './Components/SinglePost';
+import EditPost from './Components/EditPost';
 
 //importing the context in order to listen when the user auth state changes
 import {AuthProvider} from '../src/Components/UserContext/AuthContext';
@@ -28,7 +29,8 @@ function App() {
 
          <NavbarComponent/>
 
-           <Route path="/post/:id"  component={SinglePost} />
+          <Route path="/post/:id"  component={SinglePost} />
+          <Route path="/edit/post/:id"  component={EditPost} />
           <Route path="/posts"  component={Posts} />
           <Route path="/create"  component={CreatePost} />
           <Route path="/signup"  component={Signup} />

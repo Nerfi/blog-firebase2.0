@@ -43,3 +43,10 @@
   margin-bottom: 50px;
 
 }
+
+
+.singlePost__conditional > button{
+  display: inline-flex;
+  margin: 8px;
+
+}
