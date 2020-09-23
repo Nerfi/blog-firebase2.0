@@ -36,7 +36,7 @@ const EditPost = (props) => {
     <Form
 
       editData={editPost}
-      action="edit"
+
 
     />
 

@@ -52,7 +52,7 @@ const CreatePost = ({history}) => {
        <Form
         upload={handleUploadPost}
         mistake={error}
-        action="create"
+
        />
 
 
