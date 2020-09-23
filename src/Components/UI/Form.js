@@ -2,9 +2,11 @@ import React,{useState, useContext} from 'react';
 import {AuthContext} from '../UserContext/AuthContext';
 import { storage }  from '../../../src/firebase/firebase';
 
-const Form = ({upload,editData}) => {
+const Form = ({upload,editData,action}) => {
 
-  console.log(editData, 'editData')
+  console.log(action, 'action')
+
+
   //adding the state that will be independent
   const [details, setDetails] = useState({
     title: '',
@@ -111,7 +113,7 @@ const handleCategory = e => setCategory({value: e.target.value});
 
          </div>
 
-              <label>Content</label>
+              <label>{editData && editData.content ?  editData.content : "Content"}</label>
 
           <div className="form-group">
             <textarea
