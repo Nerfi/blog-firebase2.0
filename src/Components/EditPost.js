@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from  'react';
 import firebase from '../firebase/firebase';
+import Form from './UI/Form';
+import './EditPost.css';
 
 const EditPost = (props) => {
   //search on how to update the img for storage firestore
@@ -51,6 +53,18 @@ const EditPost = (props) => {
 
   return <div className="editPost__container">
 
+    <Form
+
+      editData={editPost}
+
+    />
+
+  </div>
+};
+
+export default EditPost;
+ /*
+
       <form onSubmit={handleUploadPost}>
 
        <div className="form_control">
@@ -96,7 +110,4 @@ const EditPost = (props) => {
 
 
       </form>
-  </div>
-};
-
-export default EditPost;
+      */

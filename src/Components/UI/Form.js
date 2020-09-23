@@ -2,8 +2,9 @@ import React,{useState, useContext} from 'react';
 import {AuthContext} from '../UserContext/AuthContext';
 import { storage }  from '../../../src/firebase/firebase';
 
-const Form = ({upload }) => {
+const Form = ({upload,editData}) => {
 
+  console.log(editData, 'editData')
   //adding the state that will be independent
   const [details, setDetails] = useState({
     title: '',
@@ -32,8 +33,8 @@ const Form = ({upload }) => {
 
   const handleChange = (e) => {
       //working mwith multiple inputs
-    const name = e.target.name
-    const value = e.target.value;
+    let name = e.target.name
+    let value = e.target.value;
 
     setDetails(prevValues => {
       return {
@@ -48,7 +49,6 @@ const Form = ({upload }) => {
   //function to get the img the user wnats to upload
  const handleImgUpload = e =>  setFile(e.target.files[0]);
 
-  console.log(file, 'photo should be here ') // the photo img is there!
 
   //creating function in order to create in storaga firestore the images folder
   const handleFirebaseUpload = () => {
@@ -90,20 +90,22 @@ const handleCategory = e => setCategory({value: e.target.value});
 
   return(
     <>
-      <form onSubmit={usingUpload}>
+
+       <form onSubmit={usingUpload}>
 
       {error && error}
 
          <div className="form_control">
 
-          <label>Title</label>
+          <label>{editData && editData.title ? editData.title : "Title"}</label>
 
             <input type="text"
              className="form-control"
              placeholder="Enter title"
              name="title"
              onChange={handleChange}
-             value={title}
+
+            value={title}
              required
              />
 
@@ -129,7 +131,7 @@ const handleCategory = e => setCategory({value: e.target.value});
             type="file"
             onChange={handleImgUpload}
             required
-             />
+            />
 
 
 
@@ -144,6 +146,10 @@ const handleCategory = e => setCategory({value: e.target.value});
 
 
         </form>
+
+
+
+
       </>
   )
 }

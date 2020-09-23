@@ -27,8 +27,7 @@ const CreatePost = ({history}) => {
         content,
         value,
         imgUrl: url,
-        currentUser: currentUser //he cambiado este value, antes era :user.uid, ahora es currenUser
-
+        currentUser: currentUser
       })
       .then(() => {
         history.push("/");
