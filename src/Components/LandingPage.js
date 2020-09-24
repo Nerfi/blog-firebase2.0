@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './LandingPage.css';
 import Card from 'react-bootstrap/Card';
 
 
 const LandingPage = () => {
+
+  const mostPopular = useState([]);
+
   return (
     <>
     <div className="landing__page">
