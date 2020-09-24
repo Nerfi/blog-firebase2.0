@@ -1,11 +1,9 @@
 import React,{useState, useContext} from 'react';
 import {AuthContext} from '../UserContext/AuthContext';
 import { storage }  from '../../../src/firebase/firebase';
+import firebase  from '../../../src/firebase/firebase';
 
-const Form = ({upload,editData,action}) => {
-
-  console.log(action, 'action')
-
+const Form = ({action,editData, match, history}) => {
 
   //adding the state that will be independent
   const [details, setDetails] = useState({
@@ -65,7 +63,7 @@ const Form = ({upload,editData,action}) => {
         .child(file.name)
         .getDownloadURL()
         .then((url) => {
-          //setFile(null);
+          ///setFile(null);
           setURL(url);
       })
 
@@ -77,25 +75,68 @@ const Form = ({upload,editData,action}) => {
 
 const handleCategory = e => setCategory({value: e.target.value});
 
+const createPost = async (e) => {
 
-  const usingUpload = async  (e) => {
+  if(user && url) {
+
+    await firebase.firestore().collection('posts')
+      .add({
+        title,
+        likes,
+        content,
+        value,
+        imgUrl: url,
+        currentUser: user.uid
+      })
+      .then(() => {
+        history.push("/")
+      })
+      .catch(error => setError(error.message))
+
+  }
+      //callign the fucntion that will updload the img
+      handleFirebaseUpload();
+
+};
+
+
+  const updatePost = async (e) => {
+
+    await firebase.firestore()
+      .collection('posts')
+      .doc(match)
+      .update({
+        title,
+        content,
+        value
+      })
+      .then(() => {
+        history.push("/")
+      })
+      .catch(error => setError(error.message))
+
+  };
+
+  //auxiliar function
+
+  const auxiliar = (e) => {
 
     e.preventDefault();
 
-     //nueva version a ver si funciona, I can grab the img but is not upload to firebase
-     if (user) {
-       upload(title, likes, content, value, url, user.uid);
-       handleFirebaseUpload();
-
-     }
+    if (action === 'create') {
+      createPost();
+    } else {
+      updatePost();
+    }
   };
+
 
   return(
     <>
 
-       <form onSubmit={usingUpload}>
+       <form onSubmit={auxiliar}>
 
-      {error && error}
+        {error && error}
 
          <div className="form_control">
 
@@ -127,14 +168,11 @@ const handleCategory = e => setCategory({value: e.target.value});
              />
 
           </div>
-
-
-            <input
-            type="file"
-            onChange={handleImgUpload}
-            required
-            />
-
+            {action === 'create' ? (<input
+              type="file"
+              onChange={handleImgUpload}
+              required
+            />):  null}
 
 
            <select  onChange={handleCategory} required>
@@ -144,13 +182,10 @@ const handleCategory = e => setCategory({value: e.target.value});
             <option value="Tech">Tech</option>
           </select>
 
-          <button type="submit"  className="btn_create">edit or create Post</button>
+          <button type="submit"  className="btn_create">{action === 'create' ? 'Create Post' : 'Update Post'}</button>
 
 
         </form>
-
-
-
 
       </>
   )

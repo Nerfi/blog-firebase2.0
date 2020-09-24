@@ -9,7 +9,7 @@ const LandingPage = () => {
     <div className="landing__page">
 
     <div className="landing__text">
-    <h2>aqui va algo debe ir un texto que diga qlql con la app, cambiar fuente, y hacerlo mas grande en general pero por ahora esta bien</h2>
+      <h2>aqui va algo debe ir un texto que diga qlql con la app, cambiar fuente, y hacerlo mas grande en general pero por ahora esta bien</h2>
     </div>
 
 

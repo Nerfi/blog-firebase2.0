@@ -13,13 +13,13 @@ const SinglePost = (props) => {
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
 
-
-  //desestructurando select post object
   const {likes} = selectedPost;
 
   //user context, when there is no user I got an error: Cannot destructure property 'displayName' of 'Object(...)(...)' as it is null.
-  //not sure how to fix it yet
+  //not sure how to fix it yet, creo que me pasa esto cuando no estoy logge din
   const {displayName, uid} = useContext(AuthContext);
+
+
 
     const fetchSelected = async () =>  {
 
@@ -86,21 +86,30 @@ const SinglePost = (props) => {
     e.preventDefault();
     //get into the specific post and add a new collection in order to render and have several comments for a specific post!
 
-      firebase.firestore().collection('posts').doc(props.match.params.id).collection('comments').add({
-        text: comment,
-        user: displayName,
-        userUid: uid
-      })
+        firebase.firestore().collection('posts').doc(props.match.params.id).collection('comments').add({
+          text: comment,
+          user: displayName,
+          userUid: uid
+        })
+
 
     //cleaning the state
     setComment('');
   }
 
-  const deletePost = () => {
-    return 'hola'
-  }
+  const deletePost = async () => {
+
+    await firebase.firestore().collection('posts')
+    .doc(props.match.params.id)
+    .delete()
+    .then(() => {
+      props.history.push("/")
+    })
+    .catch(error => setError(error.message))
+  };
 
   return <div className="singlePost__container">
+  {error && error}
     <div className="singlePost__title">
 
       <h1>{selectedPost.title}</h1>

@@ -26,18 +26,16 @@ const EditPost = (props) => {
 
   },[]);
 
-  //need to create the action in order to update the post
-
 
 
 
   return <div className="editPost__container">
 
     <Form
-
+      action='edit'
       editData={editPost}
-
-
+      match={props.match.params.id}
+      history={props.history}
     />
 
 
