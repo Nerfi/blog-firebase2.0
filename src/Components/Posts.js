@@ -8,16 +8,20 @@ import {Nav} from 'react-bootstrap';
 
   const [posts, setPosts] = useState([]);
 
-  const [selectCategory, setSelected] = useState();
+  //change this later becuase I have change to from null to []
+  //in order to test another query on the API call, nothing working
+  const [selectCategory, setSelected] = useState([]);
+
+  const [error, setError] = useState(null);
 
 
   useEffect(() => {
 
     const fetchPosts = async () => {
 
-      const datastore = await firebase.firestore().collection("posts")
+       await firebase.firestore().collection("posts")
 
-        datastore.get().then((snapShot) => {
+        .get().then((snapShot) => {
 
           const newArray = [];
 
@@ -34,26 +38,56 @@ import {Nav} from 'react-bootstrap';
 
   },[]);
 
-  console.log(selectCategory, 'selectCategory')
+
+  //creando fllamada a firebase db fake and fast in order to check the data
+  //is the one I want
+
+  useEffect(() => {
+
+      const fetchCategory = async () => {
+        const postCategory = [];
+
+
+      await firebase.firestore()
+        .collection('posts')
+        .where("title", "==", "Vamos a ver si se mantiene")
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            console.log({doc})
+            postCategory.push( ...doc.data() )
+          })
+          setSelected(postCategory);
+        })
+        .catch(error => setError(error.message))
+      }
+
+      fetchCategory();
+
+
+  },[]);
+
+
+  console.log(typeof(selectCategory) , ' data selectCategory')
 
 
   return <>
 
     <div className="posts__category">
 
-      <Nav className="justify-content-center" activeKey="/home"  onSelect={(eventKey) => alert(`selected ${eventKey}`)} >
+      <Nav className="justify-content-center"  activeKey={selectCategory} onSelect={(eventKey) => setSelected(eventKey)} >
         <Nav.Item>
-          <Nav.Link>Active</Nav.Link>
+          <Nav.Link  eventKey="tech" >Tech</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-1" onClick={(e) => setSelected(e.target.value)}>Link</Nav.Link>
+          <Nav.Link  eventKey="news">News</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-2">Link</Nav.Link>
+          <Nav.Link  eventKey="health">Health</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="disabled" >
-            Disabled
+          <Nav.Link  eventKey="travel" >
+            Travel
           </Nav.Link>
         </Nav.Item>
   </Nav>
