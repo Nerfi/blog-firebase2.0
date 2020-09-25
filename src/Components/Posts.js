@@ -7,6 +7,9 @@ import './Posts.css';
 
   const [posts, setPosts] = useState([]);
 
+  const [selectCategory, setSelected] = useState('');
+
+
   useEffect(() => {
 
     const fetchPosts = async () => {
@@ -30,16 +33,30 @@ import './Posts.css';
 
   },[]);
 
+  console.log(selectCategory, 'selectCategory')
 
-  return <div className="posts__container">
 
-  {
-    posts.map(posts => {
-    return <CardComponent data={posts} key={posts.id} />
-  })
-}
+  return <>
 
-  </div>
+    <div className="posts__category">
+
+      <nav onChange={(e) => setSelected(e.target.value)} >
+        <li onClick={console.log('click')}>Juan</li>
+        <li>Antonio</li>
+        <li>not sure</li>
+      </nav>
+
+    </div>
+
+   <div className="posts__container">
+      {
+        posts.map(posts => {
+        return <CardComponent data={posts} key={posts.id} />
+      })
+    }
+</div>
+
+  </>
  };
 
 

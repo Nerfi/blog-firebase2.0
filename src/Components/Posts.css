@@ -8,6 +8,14 @@
 
 }
 
+/* needs more rules but so far is good for testing */
+.posts__category  > nav {
+  display: flex;
+  align-items: center;
+  margin-left:35vh;
+  list-style: none;
+}
+
 
 /* media queries */
 
