@@ -1,43 +1,59 @@
 import React, {useState, useEffect} from 'react';
 import './LandingPage.css';
-import Card from 'react-bootstrap/Card';
+import firebase from '../firebase/firebase';
+import CardComponent from './UI/Card';
 
 
 const LandingPage = () => {
 
-  const mostPopular = useState([]);
+  const [popular, setPopular] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+
+    const fetchPopularPosts = async () => {
+
+      let postsBack = [];
+
+      await firebase.firestore()
+        .collection('posts')
+        .where("likes", ">=", 5)
+        .get()
+        .then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            postsBack.push({ id: doc.id, ...doc.data() })
+          })
+          setPopular(postsBack);
+        })
+        .catch(error => setError(error.message))
+    };
+
+    //calling the function
+    fetchPopularPosts();
+
+  }, []);
 
   return (
     <>
     <div className="landing__page">
 
     <div className="landing__text">
-      <h2>aqui va algo debe ir un texto que diga qlql con la app, cambiar fuente, y hacerlo mas grande en general pero por ahora esta bien</h2>
+      <h1>Grab experiences, share memories! </h1>
     </div>
 
-
-
-
     </div>
+
+     <div className="landingPage__banner">
+        <h2>Most popular blogs on the site </h2>
+     </div>
 
     <div className="landingPage__cards">
-      <h2>Most popular blogs on the site </h2>
 
-      <Card
-        bg="success"
-        text="dark"
-        style={{ width: '18rem' }}
-        className="mb-2"
-      >
-        <Card.Header>POST TITLE OVER HERE</Card.Header>
-        <Card.Body>
-          <Card.Title>Card Title </Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the bulk
-            of the card's content.
-          </Card.Text>
-        </Card.Body>
-    </Card>
+      {popular.map(post => {
+        return <CardComponent data={post} key={post.id}/>
+      })}
+
+
 
     </div>
 

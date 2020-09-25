@@ -27,8 +27,6 @@ const EditPost = (props) => {
   },[]);
 
 
-
-
   return <div className="editPost__container">
 
     <Form

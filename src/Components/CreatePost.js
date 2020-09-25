@@ -5,7 +5,6 @@ import Form from './UI/Form';
 const CreatePost = ({history}) => {
 
 
-
   return(
     <>
 
@@ -20,7 +19,6 @@ const CreatePost = ({history}) => {
         action='create'
 
        />
-
 
     </div>
 

@@ -5,6 +5,8 @@ import {Link} from 'react-router-dom';
 
 const CardComponent = ({data}) => {
 
+  console.log({data})
+
   return <div className="card__container">
 
       <Card style={{ width: '18rem' }}>
