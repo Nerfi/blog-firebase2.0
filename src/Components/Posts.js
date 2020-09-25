@@ -2,12 +2,13 @@ import React, {useState,useEffect} from 'react';
 import firebase from '../firebase/firebase';
 import CardComponent from './UI/Card';
 import './Posts.css';
+import {Nav} from 'react-bootstrap';
 
  const Posts = (props) => {
 
   const [posts, setPosts] = useState([]);
 
-  const [selectCategory, setSelected] = useState('');
+  const [selectCategory, setSelected] = useState();
 
 
   useEffect(() => {
@@ -40,11 +41,22 @@ import './Posts.css';
 
     <div className="posts__category">
 
-      <nav onChange={(e) => setSelected(e.target.value)} >
-        <li onClick={console.log('click')}>Juan</li>
-        <li>Antonio</li>
-        <li>not sure</li>
-      </nav>
+      <Nav className="justify-content-center" activeKey="/home" >
+        <Nav.Item onChange={(e) => setSelected(e.target.value)}>
+          <Nav.Link onChange={(e) => setSelected(e.target.value)}>Active</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link-1">Link</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link-2">Link</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="disabled" disabled>
+            Disabled
+          </Nav.Link>
+        </Nav.Item>
+  </Nav>
 
     </div>
 
