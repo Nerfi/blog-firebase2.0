@@ -41,9 +41,9 @@ import {Nav} from 'react-bootstrap';
 
     <div className="posts__category">
 
-      <Nav className="justify-content-center" activeKey="/home" >
-        <Nav.Item onChange={(e) => setSelected(e.target.value)}>
-          <Nav.Link onChange={(e) => setSelected(e.target.value)}>Active</Nav.Link>
+      <Nav className="justify-content-center" activeKey="/home"  onSelect={(eventKey) => alert(`selected ${eventKey}`)} >
+        <Nav.Item>
+          <Nav.Link>Active</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link eventKey="link-1" onClick={(e) => setSelected(e.target.value)}>Link</Nav.Link>
@@ -52,7 +52,7 @@ import {Nav} from 'react-bootstrap';
           <Nav.Link eventKey="link-2">Link</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="disabled" disabled>
+          <Nav.Link eventKey="disabled" >
             Disabled
           </Nav.Link>
         </Nav.Item>
