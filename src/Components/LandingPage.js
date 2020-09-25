@@ -3,6 +3,8 @@ import './LandingPage.css';
 import firebase from '../firebase/firebase';
 import CardComponent from './UI/Card';
 
+import AnimationEffect from './UI/Animation';
+
 
 const LandingPage = () => {
 
@@ -38,13 +40,13 @@ const LandingPage = () => {
     <div className="landing__page">
 
     <div className="landing__text">
-      <h1>Grab experiences, share memories! </h1>
+      <AnimationEffect/>
     </div>
 
     </div>
 
      <div className="landingPage__banner">
-        <h2>Most popular blogs on the site </h2>
+        <h2>Our Most Popular Posts </h2>
      </div>
 
     <div className="landingPage__cards">

@@ -5,15 +5,13 @@ import {Link} from 'react-router-dom';
 
 const CardComponent = ({data}) => {
 
-  console.log({data})
-
   return <div className="card__container">
 
       <Card style={{ width: '18rem' }}>
         <Card.Img variant="top" src={data.imgUrl} />
         <Card.Body>
-          <Card.Title>{data.title}</Card.Title>
-          <Card.Text>
+          <Card.Title className="card__title">{data.title}</Card.Title>
+          <Card.Text className="card__content">
             {data.content}
           </Card.Text>
           <Button variant="primary">

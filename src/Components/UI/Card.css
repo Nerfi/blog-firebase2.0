@@ -5,3 +5,14 @@
 .card__container {
   padding: 10px;
 }
+
+
+
+.card__content {
+  font-family: 'Architects Daughter', cursive;
+}
+
+
+.card__title {
+   font-family: 'Secular One', sans-serif;
+}
