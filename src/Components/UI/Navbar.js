@@ -1,5 +1,4 @@
 import React,{useContext, useState} from 'react';
-import './Navbar.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 //importing the context that I created before in order to listen to user auth change
@@ -47,7 +46,7 @@ const NavbarComponent = () => {
           <Nav>
 
           { !user ? (
-              <Nav.Link   href="/signup">Sign up/in</Nav.Link>
+              <Nav.Link   href="/signup">Sign up</Nav.Link>
             ) : (
                <Nav.Link  onClick={handleLogOut}>logout</Nav.Link>
             )

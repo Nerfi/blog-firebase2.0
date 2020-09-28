@@ -15,9 +15,13 @@ const SinglePost = (props) => {
 
   const {likes} = selectedPost;
 
-  //user context, when there is no user I got an error: Cannot destructure property 'displayName' of 'Object(...)(...)' as it is null.
-  //not sure how to fix it yet, creo que me pasa esto cuando no estoy logge din
-  const {displayName, uid} = useContext(AuthContext);
+  //este apaño funciona
+  const user = useContext(AuthContext);
+  let displayName ,uid
+  if(user) {
+    displayName = user.displayName
+    uid = user.uid
+  }
 
 
 
@@ -91,8 +95,6 @@ const SinglePost = (props) => {
           user: displayName,
           userUid: uid
         })
-
-
     //cleaning the state
     setComment('');
   }
@@ -109,7 +111,7 @@ const SinglePost = (props) => {
   };
 
   return <div className="singlePost__container">
-  {error && error}
+      {error && error}
     <div className="singlePost__title">
 
       <h1>{selectedPost.title}</h1>

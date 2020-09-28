@@ -36,8 +36,6 @@ import {Nav} from 'react-bootstrap';
   },[]);
 
 
-
-  //new intento, working
 useEffect(() => {
 
     const fetchPopularPosts = async () => {
@@ -61,10 +59,6 @@ useEffect(() => {
     fetchPopularPosts();
 
   }, [selectCategory]);
-
-  console.log(retrieveData, 'data retrieve')
-
-  //need to create the conditional rendering in order to call one or the other
 
   let card = (
           posts.map(posts => {
