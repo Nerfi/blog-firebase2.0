@@ -8,9 +8,10 @@ import {Nav} from 'react-bootstrap';
 
   const [posts, setPosts] = useState([]);
 
-  //change this later becuase I have change to from null to []
-  //in order to test another query on the API call, nothing working
-  const [selectCategory, setSelected] = useState([]);
+//creando la string para pasarsela como parametro a la funcion
+  const [selectCategory, setSelected] = useState("");
+  const [retrieveData, setRetrieve] = useState([]);// aqui voy a guardar los values que me devuelva la llamada a la API
+
 
   const [error, setError] = useState(null);
 
@@ -39,54 +40,51 @@ import {Nav} from 'react-bootstrap';
   },[]);
 
 
-  //creando fllamada a firebase db fake and fast in order to check the data
-  //is the one I want
 
-  useEffect(() => {
+  //new intento, almost working
+useEffect(() => {
 
-      const fetchCategory = async () => {
-        const postCategory = [];
+    const fetchPopularPosts = async () => {
 
+      let postsBack = [];
 
       await firebase.firestore()
         .collection('posts')
-        .where("title", "==", "Vamos a ver si se mantiene")
+        .where("value", "==",selectCategory)
         .get()
         .then(querySnapshot => {
           querySnapshot.forEach(doc => {
-            console.log({doc})
-            postCategory.push( ...doc.data() )
+            postsBack.push({ id: doc.id, ...doc.data() })
           })
-          setSelected(postCategory);
+          setRetrieve(postsBack);
         })
         .catch(error => setError(error.message))
-      }
+    };
 
-      fetchCategory();
+    //calling the function
+    fetchPopularPosts();
 
+  }, [selectCategory]);
 
-  },[]);
-
-
-  console.log(typeof(selectCategory) , ' data selectCategory')
+  console.log(retrieveData, 'data retrieve')
 
 
   return <>
 
     <div className="posts__category">
 
-      <Nav className="justify-content-center"  activeKey={selectCategory} onSelect={(eventKey) => setSelected(eventKey)} >
-        <Nav.Item>
-          <Nav.Link  eventKey="tech" >Tech</Nav.Link>
+      <Nav className="justify-content-center"   onSelect={(eventKey) => setSelected(eventKey)} >
+        <Nav.Item >
+          <Nav.Link  eventKey="Tech" >Tech</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link  eventKey="news">News</Nav.Link>
+          <Nav.Link  eventKey="News">News</Nav.Link>
+        </Nav.Item>
+        <Nav.Item >
+          <Nav.Link  eventKey="Health">Health</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link  eventKey="health">Health</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link  eventKey="travel" >
+          <Nav.Link  eventKey="Travel" >
             Travel
           </Nav.Link>
         </Nav.Item>

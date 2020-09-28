@@ -36,7 +36,7 @@ const NavbarComponent = () => {
 
       <h2>{error && error}</h2>
        <Navbar collapseOnSelect expand="lg" bg="light" className="fixed-top" >
-        <Navbar.Brand href="/">Main page</Navbar.Brand>
+        <Navbar.Brand href="/" className="logo__text">𝕴𝖓𝖙𝖊𝖗𝖒𝖊𝖉𝖎𝖆𝖙𝖊</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
