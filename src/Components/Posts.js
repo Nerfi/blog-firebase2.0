@@ -7,12 +7,8 @@ import {Nav} from 'react-bootstrap';
  const Posts = (props) => {
 
   const [posts, setPosts] = useState([]);
-
-//creando la string para pasarsela como parametro a la funcion
   const [selectCategory, setSelected] = useState("");
-  const [retrieveData, setRetrieve] = useState([]);// aqui voy a guardar los values que me devuelva la llamada a la API
-
-
+  const [retrieveData, setRetrieve] = useState([]);
   const [error, setError] = useState(null);
 
 
@@ -41,7 +37,7 @@ import {Nav} from 'react-bootstrap';
 
 
 
-  //new intento, almost working
+  //new intento, working
 useEffect(() => {
 
     const fetchPopularPosts = async () => {
@@ -68,6 +64,21 @@ useEffect(() => {
 
   console.log(retrieveData, 'data retrieve')
 
+  //need to create the conditional rendering in order to call one or the other
+
+  let card = (
+          posts.map(posts => {
+          return <CardComponent data={posts} key={posts.id} />
+        })
+);
+
+if(retrieveData.length > 0) {
+   card = retrieveData.map(posts => {
+    return <CardComponent key={posts.id} data={posts}/>
+   })
+}
+
+
 
   return <>
 
@@ -88,17 +99,12 @@ useEffect(() => {
             Travel
           </Nav.Link>
         </Nav.Item>
-  </Nav>
+   </Nav>
 
     </div>
-
-   <div className="posts__container">
-      {
-        posts.map(posts => {
-        return <CardComponent data={posts} key={posts.id} />
-      })
-    }
-</div>
+    <div className="posts__container">
+      {card}
+    </div>
 
   </>
  };
