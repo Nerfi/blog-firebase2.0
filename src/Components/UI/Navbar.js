@@ -21,7 +21,7 @@ const NavbarComponent = () => {
     const handleLogOut = () => {
       firebase.auth().signOut()
       .then(() =>{
-          // I use replace because I dont want the user to come back to the old page once he logs out, UI experience
+
           history.push("/");
       })
       .catch(error => {

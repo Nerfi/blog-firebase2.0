@@ -28,6 +28,7 @@ const EditPost = (props) => {
 
 
   return <div className="editPost__container">
+      {error && error}
 
     <Form
       action='edit'

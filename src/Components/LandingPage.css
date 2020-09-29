@@ -58,3 +58,10 @@
       margin-left: 14vh;
   }
 }
+
+@media(max-width: 370px) {
+  .landingPage__cards {
+    grid-template-columns: 1fr;
+    margin-left: 4vh;
+  }
+}

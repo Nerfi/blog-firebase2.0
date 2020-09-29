@@ -4,6 +4,7 @@
 
 .singlePost__img {
   border-style: double;
+  width: 450px;
 }
 
 
@@ -55,4 +56,29 @@
 
 .singlePost__container {
   padding:  20px;
+}
+
+/*  responsiveness*/
+
+@media only screen and (max-width: 568px) {
+    .singlePost__data {
+      margin-left:  18vh;
+
+    }
+ }
+
+/*examples  */
+
+@media(max-width: 992px) {
+  .singlePost__data {
+
+    margin-left: 55vh
+  }
+}
+
+@media(max-width: 768px) {
+  .singlePost__data {
+    margin-left: 40vh;
+
+  }
 }

@@ -15,7 +15,7 @@ const SinglePost = (props) => {
 
   const {likes} = selectedPost;
 
-  //este apaño funciona
+  //este apaño funciona, para cuando el usuario es null o no esta logged in
   const user = useContext(AuthContext);
   let displayName ,uid
   if(user) {
@@ -63,7 +63,7 @@ const SinglePost = (props) => {
     //calling the comments function
     fetchComments();
 
-  },[props.match.params.id]);
+  },[props.match.params.id, comments]);
 
 
 
@@ -109,6 +109,30 @@ const SinglePost = (props) => {
     })
     .catch(error => setError(error.message))
   };
+
+  //conditionally showing the comments form
+
+  let form = ( <form>
+
+        <input
+        className="post__input"
+        type="text"
+        placeholder="Add a comment..."
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        />
+
+        <button
+        className="button__input"
+        disabled={!comment}
+        type="submit"
+        onClick={postComment}
+        >
+        Post
+        </button>
+      </form>
+    );
+    if(!user) form = null;
 
   return <div className="singlePost__container">
       {error && error}
@@ -169,25 +193,7 @@ const SinglePost = (props) => {
 
     </div>
 
-    <form>
-
-      <input
-      className="post__input"
-      type="text"
-      placeholder="Add a comment..."
-      value={comment}
-      onChange={(e) => setComment(e.target.value)}
-      />
-
-      <button
-      className="button__input"
-      disabled={!comment}
-      type="submit"
-      onClick={postComment}
-      >
-      Post
-      </button>
-    </form>
+   {form}
 
 
   </div>

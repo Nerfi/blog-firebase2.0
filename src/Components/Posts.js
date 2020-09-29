@@ -75,6 +75,7 @@ if(retrieveData.length > 0) {
 
 
   return <>
+  {error && error}
 
     <div className="posts__category">
 

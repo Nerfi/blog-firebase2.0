@@ -38,6 +38,7 @@ const LandingPage = () => {
   return (
     <>
     <div className="landing__page">
+    {error && error}
 
     <div className="landing__text">
       <AnimationEffect/>
