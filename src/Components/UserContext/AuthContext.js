@@ -25,11 +25,12 @@ const AuthContext = React.createContext();
 
   },[currentUser]);
 
-  return(
     /* every context object has a provider , the mission of this provider is to
     PROVIDE the value that we pass in as a defualt value , that way all the components
     around this HOC will be able to use this state
     */
+
+  return(
     <AuthContext.Provider value={currentUser}>
       {props.children}
     </AuthContext.Provider>
